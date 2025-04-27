@@ -16,229 +16,118 @@ A comprehensive AI-powered assistant platform for researchers that provides medi
 - OpenAI API key (for AI functionality)
 - Neon PostgreSQL database (for storing data)
 
-## Installation
+## 📚 Research Assistant Setup Guide
+# Step 1: Download the Project
+Download the zip file from GitHub (automatically saves in Downloads).
 
-### Mac and Linux
+Extract the zip file.
 
-1. Clone the repository:
-   \`\`\`bash
-   git clone https://github.com/yourusername/research-assistant.git
-   cd research-assistant
-   \`\`\`
+Move the extracted folder to your Desktop.
 
-2. Install dependencies:
-   \`\`\`bash
-   npm install
-   # or
-   yarn install
-   \`\`\`
+# Step 2: Install VS Code
+Download VS Code from: https://code.visualstudio.com/download
 
-3. Create a `.env.local` file in the root directory with the following variables:
-   \`\`\`
-   OPENAI_API_KEY=your_openai_api_key
-   DATABASE_URL=your_neon_database_url
-   \`\`\`
+Install it according to your system (Windows / Mac / Linux).
 
-4. Set up the database:
-   \`\`\`bash
-   # Run the SQL script to create tables
-   npx tsx scripts/setup-db.js
-   \`\`\`
+# Step 3: Install Node.js
+Download Node.js from: https://nodejs.org/en/download
 
-5. Start the development server:
-   \`\`\`bash
-   npm run dev
-   # or
-   yarn dev
-   \`\`\`
+Open the downloaded .msi file.
 
-6. Open your browser and navigate to `http://localhost:3000`
+Install by clicking:
 
-### Windows
+Next → Next → Accept → Install
 
-1. Clone the repository using Git Bash or Command Prompt:
-   \`\`\`bash
-   git clone https://github.com/yourusername/research-assistant.git
-   cd research-assistant
-   \`\`\`
+Important: Check "Add to PATH" during installation.
 
-2. Install dependencies:
-   \`\`\`bash
-   npm install
-   # or
-   yarn install
-   \`\`\`
+After installation, a PowerShell window might open automatically and install additional dependencies (can take up to 1 hour depending on your processor).
 
-3. Create a `.env.local` file in the root directory with the following variables:
-   \`\`\`
-   OPENAI_API_KEY=your_openai_api_key
-   DATABASE_URL=your_neon_database_url
-   \`\`\`
+# Step 4: Get Your OpenAI API Key
+Create an API Key at: https://platform.openai.com/api-keys
 
-4. Set up the database:
-   \`\`\`bash
-   # Run the SQL script to create tables
-   npx tsx scripts/setup-db.js
-   \`\`\`
+Save the key immediately (you cannot view it again later).
 
-5. Start the development server:
-   \`\`\`bash
-   npm run dev
-   # or
-   yarn dev
-   \`\`\`
+Add credits (e.g., €5 is enough for 2-3 months).
 
-6. Open your browser and navigate to `http://localhost:3000`
+# Step 5: Setup Project in VS Code
+Open VS Code from the Start Menu.
 
-## Database Setup
+Open the extracted project folder: RESEARCH-ASSISTANT-MAIN.
 
-The application requires a PostgreSQL database. We recommend using [Neon](https://neon.tech) for a serverless PostgreSQL database.
+In the Explorer panel (left side), right-click → New File → name it .env.local.
 
-Create the necessary tables by running the following SQL script:
+Paste the following content inside .env.local:
 
-\`\`\`sql
--- Create users table
-CREATE TABLE users (
-  id SERIAL PRIMARY KEY,
-  name VARCHAR(255) NOT NULL,
-  email VARCHAR(255) UNIQUE NOT NULL,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
 
--- Create media table
-CREATE TABLE media (
-  id SERIAL PRIMARY KEY,
-  user_id INTEGER REFERENCES users(id),
-  filename VARCHAR(255) NOT NULL,
-  file_type VARCHAR(100) NOT NULL,
-  file_size BIGINT NOT NULL,
-  original_language VARCHAR(10),
-  transcription TEXT,
-  storage_path VARCHAR(255),
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
+# Database Configuration
+DATABASE_URL=postgresql://neondb_owner:npg_twh9XVmCD8GL@ep-broad-king-a2vvv7gl-pooler.eu-central-1.aws.neon.tech/neondb?sslmode=require
+DATABASE_URL_UNPOOLED=postgresql://neondb_owner:npg_twh9XVmCD8GL@ep-broad-king-a2vvv7gl.eu-central-1.aws.neon.tech/neondb?sslmode=require
 
--- Create media translations table
-CREATE TABLE media_translations (
-  id SERIAL PRIMARY KEY,
-  media_id INTEGER REFERENCES media(id),
-  target_language VARCHAR(10) NOT NULL,
-  translation TEXT NOT NULL,
-  audio_path VARCHAR(255),
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
+# Postgres Parameters
+PGHOST=ep-broad-king-a2vvv7gl-pooler.eu-central-1.aws.neon.tech
+PGHOST_UNPOOLED=ep-broad-king-a2vvv7gl.eu-central-1.aws.neon.tech
+PGUSER=neondb_owner
+PGDATABASE=neondb
+PGPASSWORD=npg_twh9XVmCD8GL
 
--- Create documents table
-CREATE TABLE documents (
-  id SERIAL PRIMARY KEY,
-  user_id INTEGER REFERENCES users(id),
-  filename VARCHAR(255) NOT NULL,
-  file_type VARCHAR(100) NOT NULL,
-  file_size BIGINT NOT NULL,
-  content_text TEXT,
-  storage_path VARCHAR(255),
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
+# Postgres Templates
+POSTGRES_URL=postgres://neondb_owner:npg_twh9XVmCD8GL@ep-broad-king-a2vvv7gl-pooler.eu-central-1.aws.neon.tech/neondb?sslmode=require
+POSTGRES_URL_NON_POOLING=postgres://neondb_owner:npg_twh9XVmCD8GL@ep-broad-king-a2vvv7gl.eu-central-1.aws.neon.tech/neondb?sslmode=require
+POSTGRES_USER=neondb_owner
+POSTGRES_HOST=ep-broad-king-a2vvv7gl-pooler.eu-central-1.aws.neon.tech
+POSTGRES_PASSWORD=npg_twh9XVmCD8GL
+POSTGRES_DATABASE=neondb
+POSTGRES_URL_NO_SSL=postgres://neondb_owner:npg_twh9XVmCD8GL@ep-broad-king-a2vvv7gl-pooler.eu-central-1.aws.neon.tech/neondb
+POSTGRES_PRISMA_URL=postgres://neondb_owner:npg_twh9XVmCD8GL@ep-broad-king-a2vvv7gl-pooler.eu-central-1.aws.neon.tech/neondb?connect_timeout=15&sslmode=require
 
--- Create websites table
-CREATE TABLE websites (
-  id SERIAL PRIMARY KEY,
-  user_id INTEGER REFERENCES users(id),
-  url VARCHAR(255) NOT NULL,
-  title VARCHAR(255),
-  description TEXT,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
+# OpenAI API Key
+OPENAI_API_KEY="your-openai-api-key-here"
 
--- Create website pages table
-CREATE TABLE website_pages (
-  id SERIAL PRIMARY KEY,
-  website_id INTEGER REFERENCES websites(id),
-  url VARCHAR(255) NOT NULL,
-  title VARCHAR(255) NOT NULL,
-  content TEXT NOT NULL,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
+# Application Settings
+NODE_ENV="development"
 
--- Create vector embeddings table
-CREATE TABLE vector_embeddings (
-  id SERIAL PRIMARY KEY,
-  source_type VARCHAR(50) NOT NULL, -- 'document', 'media', or 'website'
-  source_id INTEGER NOT NULL,
-  chunk_index INTEGER NOT NULL,
-  chunk_text TEXT NOT NULL,
-  embedding JSONB NOT NULL,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
 
--- Create conversations table
-CREATE TABLE conversations (
-  id SERIAL PRIMARY KEY,
-  user_id INTEGER REFERENCES users(id),
-  title VARCHAR(255),
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
 
--- Create messages table
-CREATE TABLE messages (
-  id SERIAL PRIMARY KEY,
-  conversation_id INTEGER REFERENCES conversations(id),
-  role VARCHAR(50) NOT NULL, -- 'user', 'assistant', or 'system'
-  content TEXT NOT NULL,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
-\`\`\`
+⚡ Important:
+At the line OPENAI_API_KEY, paste your real OpenAI secret key.
 
-## Usage
+# Step 6: Save and Reboot
+Save the .env.local file.
 
-### Media Translation
+Reboot your computer once (recommended).
 
-1. Navigate to the "Media Translation" tab
-2. Upload an audio or video file
-3. Select the target language for translation
-4. Click "Process Media"
-5. Once processing is complete, you can:
-   - View the transcription and translation
-   - Play the audio for both the original and translated content
-   - Download the transcription and translation as text files
-   - Chat with the content to ask questions about it
+# Step 7: Open VS Code and Terminal
+Open VS Code → Open your project again.
 
-### Document Chat
+Click Terminal → New Terminal.
 
-1. Navigate to the "Document Chat" tab
-2. Upload one or more documents (PDF, DOCX, TXT, etc.)
-3. Click "Process Documents"
-4. Once processing is complete, you can ask questions about the document content
+Terminal will open at bottom.
 
-### Website Knowledge
+# Step 8: Install Node.js and PNPM
+In the terminal: node -v
+(should show version like v22.15.0)
 
-1. Navigate to the "Website Knowledge" tab
-2. Enter a website URL
-3. Click "Index"
-4. Once indexing is complete, you can ask questions about the website content
+If node is showing version correctly, now install pnpm:  npm install -g pnpm
 
-### General Chat
+# Step 9: Install Project Dependencies
+Run this inside terminal:  pnpm install
 
-1. Navigate to the "Chat Assistant" tab
-2. Ask any research-related questions
-3. The AI will provide helpful responses based on its knowledge
+# Step 10: Run the Project
+Finally, to start your app, run:  pnpm dev
 
-## Troubleshooting
+# You will see output like:
+▲ Next.js 15.2.4
+- Local:        http://localhost:3000
+- Network:      http://192.168.0.109:3000
+- Environments: .env.local
 
-### API Key Issues
+✓ Starting...
+Step 11: Open Your App
+Open browser
 
-If you see a warning about the OpenAI API key being missing:
-1. Make sure you've added your OpenAI API key to the `.env.local` file
-2. Restart the development server
-3. Refresh the page
+# Visit: http://localhost:3000
 
-### Database Connection Issues
-
-If you encounter database connection errors:
-1. Verify your Neon database URL is correct in the `.env.local` file
-2. Check that your IP address is allowed in the Neon database settings
-3. Ensure the database tables have been created correctly
+If you see any error, refresh the browser once.
 
 ### File Upload Issues
 
