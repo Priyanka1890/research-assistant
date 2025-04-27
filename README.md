@@ -88,7 +88,7 @@ NODE_ENV="development"
 
 
 
-⚡ Important:
+# ⚡ Important:
 At the line OPENAI_API_KEY, paste your real OpenAI secret key.
 
 # Step 6: Save and Reboot
