@@ -58,19 +58,17 @@ In the Explorer panel (left side), right-click → New File → name it .env.loc
 
 Paste the following content inside .env.local:
 
-
-#Database Configuration
 DATABASE_URL=postgresql://neondb_owner:npg_twh9XVmCD8GL@ep-broad-king-a2vvv7gl-pooler.eu-central-1.aws.neon.tech/neondb?sslmode=require
 DATABASE_URL_UNPOOLED=postgresql://neondb_owner:npg_twh9XVmCD8GL@ep-broad-king-a2vvv7gl.eu-central-1.aws.neon.tech/neondb?sslmode=require
 
-#Postgres Parameters
+
 PGHOST=ep-broad-king-a2vvv7gl-pooler.eu-central-1.aws.neon.tech
 PGHOST_UNPOOLED=ep-broad-king-a2vvv7gl.eu-central-1.aws.neon.tech
 PGUSER=neondb_owner
 PGDATABASE=neondb
 PGPASSWORD=npg_twh9XVmCD8GL
 
-#Postgres Templates
+
 POSTGRES_URL=postgres://neondb_owner:npg_twh9XVmCD8GL@ep-broad-king-a2vvv7gl-pooler.eu-central-1.aws.neon.tech/neondb?sslmode=require
 POSTGRES_URL_NON_POOLING=postgres://neondb_owner:npg_twh9XVmCD8GL@ep-broad-king-a2vvv7gl.eu-central-1.aws.neon.tech/neondb?sslmode=require
 POSTGRES_USER=neondb_owner
@@ -80,10 +78,10 @@ POSTGRES_DATABASE=neondb
 POSTGRES_URL_NO_SSL=postgres://neondb_owner:npg_twh9XVmCD8GL@ep-broad-king-a2vvv7gl-pooler.eu-central-1.aws.neon.tech/neondb
 POSTGRES_PRISMA_URL=postgres://neondb_owner:npg_twh9XVmCD8GL@ep-broad-king-a2vvv7gl-pooler.eu-central-1.aws.neon.tech/neondb?connect_timeout=15&sslmode=require
 
-#OpenAI API Key
+
 OPENAI_API_KEY="your-openai-api-key-here"
 
-#Application Settings
+
 NODE_ENV="development"
 
 
